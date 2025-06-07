@@ -7,7 +7,7 @@ const Footer = () => {
                     <a href="#" class="nav-link px-2 text-body-secondary">Home</a>
                 </li> 
                 <li class="nav-item">
-                    <a href="#" class="nav-link px-2 text-body-secondary">Featu</a>
+                    <a href="#" class="nav-link px-2 text-body-secondary">Feature</a>
                     
                 </li> 
                 <li class="nav-item">
