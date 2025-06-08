@@ -4,17 +4,19 @@ import Footer from "./components/Footer";
 import Sidebar from "./components/Sidebar";
 import "./App.css";
 import CreateForm from "./components/CreateForm";
-import Post from "./components/Post";
+
+import PostList from "./components/PostList";
+import {useState} from "react";
 
 function App() {
-
+  const [selectedTab,setselectedTab]=useState("Home");
   return (
      <div className="app-container">
-      <Sidebar />
+        <Sidebar selectedTab={selectedTab} setselectedTab={setselectedTab}/>
         <div className="content-container">
         <Header />
-        <Post/>
-        <CreateForm />
+        {selectedTab === "Home" ? <PostList/> : <CreateForm />}
+        
         <Footer />
       </div>
      </div>
