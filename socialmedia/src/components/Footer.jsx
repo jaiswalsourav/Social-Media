@@ -1,26 +1,26 @@
 const Footer = () => {
   return (
-    <div class="container">
-         <footer class="py-3 my-4"> 
-            <ul class="nav justify-content-center border-bottom pb-3 mb-3"> 
-                <li class="nav-item">
-                    <a href="#" class="nav-link px-2 text-body-secondary">Home</a>
+    <div className="container">
+         <footer className="py-3 my-4"> 
+            <ul className="nav justify-content-center border-bottom pb-3 mb-3"> 
+                <li className="nav-item">
+                    <a href="#" className="nav-link px-2 text-body-secondary">Home</a>
                 </li> 
-                <li class="nav-item">
-                    <a href="#" class="nav-link px-2 text-body-secondary">Feature</a>
+                <li className="nav-item">
+                    <a href="#" className="nav-link px-2 text-body-secondary">Feature</a>
                     
                 </li> 
-                <li class="nav-item">
-                    <a href="#" class="nav-link px-2 text-body-secondary">Price</a>
+                <li className="nav-item">
+                    <a href="#" className="nav-link px-2 text-body-secondary">Price</a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link px-2 text-body-secondary">FAQs</a>
+                <li className="nav-item">
+                    <a href="#" className="nav-link px-2 text-body-secondary">FAQs</a>
                     </li> 
-                    <li class="nav-item">
-                        <a href="#" class="nav-link px-2 text-body-secondary">About</a>
+                    <li className="nav-item">
+                        <a href="#" className="nav-link px-2 text-body-secondary">About</a>
                         </li> 
             </ul>
-             <p class="text-center text-body-secondary">© 2025 Company, Inc</p> 
+             <p className="text-center text-body-secondary">© 2025 Company, Inc</p> 
              </footer> 
              </div>
   );
