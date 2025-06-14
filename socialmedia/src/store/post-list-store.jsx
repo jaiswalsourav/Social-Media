@@ -11,7 +11,8 @@ const postListReducer = (curentPostList, action) => {
     let newPostList =curentPostList;
     
     if (action.type === "DELETE_POST") {
-        newPostList = curentPostList.filter(post => post.id !== action.payload.id);
+        console.log(`Delete post with ID: ${action.payload}`);
+        newPostList = curentPostList.filter(post => post.id !== action.payload);
     }
      else if (action.type === "ADD_POST") {
 
@@ -27,7 +28,7 @@ const PostListProvide =({children}) => {
     
     const addPost = (userID, postTitle, postContent, postReaction, postTag) => {
 
-        console.log(`${userID}, ${postTitle}, ${postContent}, ${postReaction}, ${postTag}`);
+       // console.log(`${userID}, ${postTitle}, ${postContent}, ${postReaction}, ${postTag}`);
         dispatchPostList({
             type: "ADD_POST",
             payload: {
@@ -43,8 +44,11 @@ const PostListProvide =({children}) => {
     };
 
     const deletePost = (postID) => {
-        dispatchPostList({type: "DELETE_POST", payload: postID});
-        console.log(`Delete post with ID: ${postID}`);
+        dispatchPostList(
+            {type: "DELETE_POST",
+                 payload: postID,
+                });
+        //console.log(`Delete post with ID: ${postID}`);
        
     };
 
