@@ -18,8 +18,15 @@ const CreateForm = () => {
         const postTitle = postTitleElement.current.value;
         const postContent = postContentElement.current.value;
         const postReaction = postReactionElement.current.value;
-        const postTags = postTagsElement.current.value.split(/(\s+)/);
-        console.log(`UserID: ${userID}, PostTitle: ${postTitle}, PostContent: ${postContent}, PostReaction: ${postReaction}, PostTags: ${postTags}`);
+        const postTags = postTagsElement.current.value.split(" ");
+
+        userIDElement.current.value = '';
+        postTitleElement.current.value = '';  
+        postContentElement.current.value = '';
+        postReactionElement.current.value = '';
+        postTagsElement.current.value = '';
+
+       // console.log(`UserID: ${userID}, PostTitle: ${postTitle}, PostContent: ${postContent}, PostReaction: ${postReaction}, PostTags: ${postTags}`);
         addPost(userID, postTitle, postContent, postReaction, postTags);
  
   }; 
