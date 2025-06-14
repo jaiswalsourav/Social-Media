@@ -4,7 +4,6 @@ import Footer from "./components/Footer";
 import Sidebar from "./components/Sidebar";
 import "./App.css";
 import CreateForm from "./components/CreateForm";
-
 import PostList from "./components/PostList";
 import {useState} from "react";
 
