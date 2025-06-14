@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-//import PostList from "../components/PostList";
+import PostList from "../components/PostList";
 
  export const PostListData= createContext({
     postList: [],
@@ -24,7 +24,7 @@ const postListReducer = (curentPostList, action) => {
 
 const PostListProvide =({children}) => {
 
-    const [postList, dispatchPostList] = useReducer(postListReducer,DEFAULT_POST_LIST);
+    const [postList, dispatchPostList] = useReducer(postListReducer, DEFAULT_POST_LIST);
     
     const addPost = (userID, postTitle, postContent, postReaction, postTag) => {
 
@@ -80,8 +80,6 @@ const DEFAULT_POST_LIST = [
         tags : ["delhi", "capital"],
     },
 ];
-
-
 
 
 export default PostListProvide;

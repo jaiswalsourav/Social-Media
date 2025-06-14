@@ -6,21 +6,23 @@ import "./App.css";
 import CreateForm from "./components/CreateForm";
 import PostList from "./components/PostList";
 import {useState} from "react";
+import PostListProvide from "./store/post-list-store";
 
 function App() {
   const [selectedTab,setselectedTab]=useState("Home");
   return (
+    <PostListProvide>
      <div className="app-container">
         <Sidebar selectedTab={selectedTab} setselectedTab={setselectedTab}/>
         <div className="content-container">
         <Header />
-        {selectedTab === "Home" ? <PostList/> : <CreateForm />}
-        
+        {selectedTab === "Home" ? <PostList/> : <CreateForm />} 
         <Footer />
       </div>
      </div>
+     </PostListProvide>
     
-  )
+  );
 }
 
-export default App
+export default App;
