@@ -8,7 +8,7 @@ const CreateForm = () => {
   
      const userIDElement=useRef();
      const postTitleElement=useRef();
-     const postContentElement=useRef();
+     const postbodyElement=useRef();
      const postReactionElement=useRef();
      const postTagsElement=useRef();
        const handleSubmit= (event) => {
@@ -16,18 +16,18 @@ const CreateForm = () => {
         console.log("Form submitted");
         const userID = userIDElement.current.value;
         const postTitle = postTitleElement.current.value;
-        const postContent = postContentElement.current.value;
+        const postbody = postbodyElement.current.value;
         const postReaction = postReactionElement.current.value;
         const postTags = postTagsElement.current.value.split(" ");
 
         userIDElement.current.value = '';
         postTitleElement.current.value = '';  
-        postContentElement.current.value = '';
+        postbodyElement.current.value = '';
         postReactionElement.current.value = '';
         postTagsElement.current.value = '';
 
-       // console.log(`UserID: ${userID}, PostTitle: ${postTitle}, PostContent: ${postContent}, PostReaction: ${postReaction}, PostTags: ${postTags}`);
-        addPost(userID, postTitle, postContent, postReaction, postTags);
+       // console.log(`UserID: ${userID}, PostTitle: ${postTitle}, Postbody: ${postbody}, PostReaction: ${postReaction}, PostTags: ${postTags}`);
+        addPost(userID, postTitle, postbody, postReaction, postTags);
  
   }; 
     return (
@@ -41,8 +41,8 @@ const CreateForm = () => {
     <input ref={postTitleElement} type="text" className="form-control" id="title" placeholder="how are you feeling today" />
   </div>
   <div className="mb-3">
-    <label htmlFor="content" className="form-label">Content</label>
-    <textarea ref={postContentElement} type="text" rows="4" className="form-control" id="Content" placeholder="Write your body here..." />
+    <label htmlFor="body" className="form-label">body</label>
+    <textarea ref={postbodyElement} type="text" rows="4" className="form-control" id="body" placeholder="Write your body here..." />
   </div>
   <div className="mb-3">
     <label htmlFor="reaction" className="form-label">Reaction</label>

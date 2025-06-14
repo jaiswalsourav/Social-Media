@@ -4,6 +4,7 @@ import PostList from "../components/PostList";
  export const PostListData= createContext({
     postList: [],
     addPost: ()=> {},
+    addInitialPost: ()=> {},
     deletePost: ()=> {},
 });
 
@@ -13,6 +14,10 @@ const postListReducer = (curentPostList, action) => {
     if (action.type === "DELETE_POST") {
         console.log(`Delete post with ID: ${action.payload}`);
         newPostList = curentPostList.filter(post => post.id !== action.payload);
+    }
+    else if (action.type === "ADD_INITIAL_POSTS") {
+        console.log("Adding initial posts");
+        newPostList = action.payload.posts;
     }
      else if (action.type === "ADD_POST") {
 
@@ -24,7 +29,7 @@ const postListReducer = (curentPostList, action) => {
 
 const PostListProvide =({children}) => {
 
-    const [postList, dispatchPostList] = useReducer(postListReducer, DEFAULT_POST_LIST);
+    const [postList, dispatchPostList] = useReducer(postListReducer, []);
     
     const addPost = (userID, postTitle, postContent, postReaction, postTag) => {
 
@@ -43,6 +48,25 @@ const PostListProvide =({children}) => {
     
     };
 
+    const addInitialPost = (posts) => {
+
+       // console.log(`${userID}, ${postTitle}, ${postContent}, ${postReaction}, ${postTag}`);
+        dispatchPostList({
+            type: "ADD_INITIAL_POSTS",
+            payload: {
+                posts: posts.map(post => ({
+                    id: post.id,
+                    title: post.title,
+                    content: post.body,
+                    reactions: post.reactions.likes,
+                    userid: `user-${post.userId}`,
+                    tags: post.tags || [],
+                })),
+            }
+        });
+    
+    };
+
     const deletePost = (postID) => {
         dispatchPostList(
             {type: "DELETE_POST",
@@ -54,7 +78,7 @@ const PostListProvide =({children}) => {
 
     return (
         <PostListData.Provider value={{ 
-            postList, addPost,deletePost }}>
+            postList, addPost,addInitialPost,deletePost }}>
             {children}
         </PostListData.Provider>
     );
@@ -62,7 +86,7 @@ const PostListProvide =({children}) => {
 };
 
 
-const DEFAULT_POST_LIST = [
+/*const DEFAULT_POST_LIST = [
     {
         id: 1,
         title: "Wellcome to mumbai",
@@ -79,7 +103,7 @@ const DEFAULT_POST_LIST = [
         userid: "user-6",
         tags : ["delhi", "capital"],
     },
-];
+];*/
 
 
 export default PostListProvide;
