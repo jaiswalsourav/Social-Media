@@ -1,10 +1,11 @@
-import { createContext, useReducer } from "react";
-import PostList from "../components/PostList";
+import { createContext, useCallback, useReducer,useEffect,useState } from "react";
+//import PostList from "../components/PostList";
 
  export const PostListData= createContext({
     postList: [],
+    fetching: false,
     addPost: ()=> {},
-    addInitialPost: ()=> {},
+   // addInitialPost: ()=> {},
     deletePost: ()=> {},
 });
 
@@ -30,20 +31,14 @@ const postListReducer = (curentPostList, action) => {
 const PostListProvide =({children}) => {
 
     const [postList, dispatchPostList] = useReducer(postListReducer, []);
+    const [fetching, setFetching] = useState(false);
     
-    const addPost = (userID, postTitle, postContent, postReaction, postTag) => {
+    const addPost = (post) => {
 
-       // console.log(`${userID}, ${postTitle}, ${postContent}, ${postReaction}, ${postTag}`);
+        console.log("sfifu8e",post);
         dispatchPostList({
             type: "ADD_POST",
-            payload: {
-                id: Math.random().toString(),
-                title: postTitle,
-                content: postContent,
-                reactions: postReaction,
-                userid: userID,
-                tags: postTag,
-            }
+            payload: post,
         });
     
     };
@@ -53,13 +48,14 @@ const PostListProvide =({children}) => {
        // console.log(`${userID}, ${postTitle}, ${postContent}, ${postReaction}, ${postTag}`);
         dispatchPostList({
             type: "ADD_INITIAL_POSTS",
-            payload: {
+            payload: 
+            {
                 posts: posts.map(post => ({
                     id: post.id,
                     title: post.title,
-                    content: post.body,
+                    body: post.body,
                     reactions: post.reactions.likes,
-                    userid: `user-${post.userId}`,
+                    userId: `user-${post.userId}`,
                     tags: post.tags || [],
                 })),
             }
@@ -67,18 +63,41 @@ const PostListProvide =({children}) => {
     
     };
 
-    const deletePost = (postID) => {
+    const deletePost = useCallback((postID) => {
         dispatchPostList(
             {type: "DELETE_POST",
                  payload: postID,
                 });
         //console.log(`Delete post with ID: ${postID}`);
        
-    };
+    },[dispatchPostList]);
+
+    useEffect(() => {
+          setFetching(true);
+          const controller = new AbortController();
+          const signal = controller.signal;
+          console.log("Fetchingstarted... ",{signal});
+          fetch('https://dummyjson.com/posts')
+          .then(res => res.json())
+          .then(data => {
+            //console.log(data.posts);
+            addInitialPost(data.posts);
+            setFetching(false);
+            //console.log("Fetching underway ");
+         //console.log("Fetching posts from server...");   
+               });
+
+               return () => {
+                    controller.abort();
+                   console.log("Fetching aborted... ");
+               }
+        }, []);
+
+
 
     return (
         <PostListData.Provider value={{ 
-            postList, addPost,addInitialPost,deletePost }}>
+            postList, fetching, addPost, deletePost }}>
             {children}
         </PostListData.Provider>
     );

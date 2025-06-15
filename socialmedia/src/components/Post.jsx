@@ -15,7 +15,7 @@ const Post = ({post}) => {
     <MdDelete />
   </span>
     </h5>
-    <p className="card-text">{post.content}</p>
+    <p className="card-text">{post.body}</p>
 
     {post.tags.map((tags)=>(<span key={tags} className="badge bg-secondary me-1">{tags}</span>))}
     <div className="alert alert-warning" role="alert">
