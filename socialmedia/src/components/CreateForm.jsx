@@ -1,9 +1,12 @@
 import {useContext, useRef } from "react";
 import {PostListData}  from "../store/post-list-store";
+import {useNavigate} from "react-router-dom";
 
 const CreateForm = () => {
     
   const {addPost} = useContext(PostListData);
+
+  const nevigate = useNavigate();
 
   
      const userIDElement=useRef();
@@ -20,11 +23,11 @@ const CreateForm = () => {
         const postReaction = postReactionElement.current.value;
         const postTags = postTagsElement.current.value.split(" ");
 
-       // userIDElement.current.value = '';
-       // postTitleElement.current.value = '';  
-        //postbodyElement.current.value = '';
-        //postReactionElement.current.value = '';
-        //postTagsElement.current.value = '';
+         userIDElement.current.value = '';
+         postTitleElement.current.value = '';  
+         postbodyElement.current.value = '';
+         postReactionElement.current.value = '';
+         postTagsElement.current.value = '';
 
         fetch('https://dummyjson.com/posts/add', {
              method: 'POST',
@@ -43,6 +46,7 @@ const CreateForm = () => {
                  .then(post => {
                   console.log("Post added successfully:", post);
                   addPost(post)});
+                  nevigate('/'); // Navigate to the home page after adding the post
                        
 
        // console.log(`UserID: ${userID}, PostTitle: ${postTitle}, Postbody: ${postbody}, PostReaction: ${postReaction}, PostTags: ${postTags}`);
